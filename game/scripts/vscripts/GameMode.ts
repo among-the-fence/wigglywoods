@@ -39,6 +39,15 @@ export class GameMode {
     {
         ListenToGameEvent("npc_spawned", event => this.onNPCSpawned(event), undefined);
         command_listener = ListenToGameEvent("player_chat", event => this.onPlayerChat(event), undefined);
+        ListenToGameEvent("entity_killed", event => this.onEntityKilled(event), undefined);
+    }
+
+    onEntityKilled(event: GameEventProvidedProperties & EntityKilledEvent): void {
+        let unit = EntIndexToHScript(event.entindex_killed) as CDOTA_BaseNPC;
+        if (unit.IsCourier())
+        {
+            print("Courier died!");
+        }
     }
 
     setFilters() {
@@ -117,14 +126,23 @@ export class GameMode {
     onNPCSpawned(event: NpcSpawnedEvent)
     {
         let unit = EntIndexToHScript(event.entindex) as CDOTA_BaseNPC;
+        // DeepPrintTable(getmetatable(unit));
+        // print((unit.GetClassname() == "npc_dota_creep_lane" || unit.GetClassname() == "npc_dota_creep_neutral"));
+
 
         // if (unit.GetName() == "npc_dota_roshan")
         // {
         //     unit.AddAbility("roshan_multiply");
         //     unit.FindAbilityByName("roshan_multiply")?.SetLevel(1);
         // }
+        if (unit.IsCourier())
+        {
+            unit.AddAbility("courier_autodeliver");
+            unit.FindAbilityByName("courier_autodeliver")?.SetLevel(1);
+            unit.SetBaseMoveSpeed(1100);
+        }
 
-        if (unit.IsCreep() || unit.IsNeutralUnitType())
+        if ((unit.GetClassname() == "npc_dota_creep_lane" || unit.GetClassname() == "npc_dota_creep_neutral"))
         {
             let game_minute = Math.floor(GameRules.GetDOTATime(false, false)/60);
             unit.SetBaseDamageMin(unit.GetBaseDamageMin()*((CREEP_SCALE * game_minute)+1));
