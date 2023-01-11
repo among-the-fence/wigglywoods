@@ -9,4 +9,34 @@
 		
 		"ItemInitialStockTime"			"645.0"
     }
+	"item_bracer"
+	{
+		
+		"ItemLevelByGameTime"			"12"
+
+		"AbilityValues"
+		{
+			"clock_time"			"12"
+		}
+	}
+	"item_wraith_band"
+	{
+		
+		"ItemLevelByGameTime"			"12"
+
+		"AbilityValues"
+		{
+			"clock_time"			"12"
+		}
+	}
+	"item_null_talisman"
+	{
+		
+		"ItemLevelByGameTime"			"12"
+5
+		"AbilityValues"
+		{
+			"clock_time"			"12"
+		}
+	}
 }
