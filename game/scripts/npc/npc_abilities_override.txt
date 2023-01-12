@@ -33,7 +33,7 @@
 	{
 		
 		"ItemLevelByGameTime"			"12"
-5
+
 		"AbilityValues"
 		{
 			"clock_time"			"12"
