@@ -128,7 +128,7 @@
 			//"item_barricade"			"1"
 			"item_flicker"				"1"
 			//"item_guardian_shell"		"1"
-			"item_harpoon"				"1"
+			//"item_harpoon"				"1"
 			"item_havoc_hammer"			"1"
 			"item_illusionsts_cape"		"1"
 			"item_panic_button"			"1"
