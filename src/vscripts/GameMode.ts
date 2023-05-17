@@ -70,6 +70,8 @@ export class GameMode {
         this.Game.SetRespawnTimeScale(RESPAWN_MODIFIER);
         this.Game.SetFreeCourierModeEnabled(true);
         this.Game.SetUseDefaultDOTARuneSpawnLogic(true);
+        this.Game.SetTowerBackdoorProtectionEnabled(true);
+        GameRules.SetPreGameTime(60);
     }
 
     public OnStateChange(): void {
@@ -81,12 +83,18 @@ export class GameMode {
                 Timers.CreateTimer(3, () => {
                     GameRules.FinishCustomGameSetup();
                 });
+                
             }
         }
 
         // Start game once pregame hits
         if (state === GameState.PRE_GAME) {
+            GameRules.SetTimeOfDay(0.0)
             Timers.CreateTimer(0.2, () => this.StartGame());
+        }
+
+        if (state == GameState.GAME_IN_PROGRESS){
+            GameRules.SetTimeOfDay(0.25)
         }
     }
 
@@ -98,6 +106,7 @@ export class GameMode {
     DeleteCommandListener(): number | void {
         print("Removing Command Listener!")
         StopListeningToGameEvent(command_listener);
+        GameRules.SendCustomMessage("backdoor enabled: " + this.Game.GetTowerBackdoorProtectionEnabled(), 0, 0)
         GameRules.SendCustomMessage("Game Rules Set!", 0, 0)
         GameRules.SendCustomMessage("Gold Scale: " + GOLD_MODIFIER, 1, 1)
         GameRules.SendCustomMessage("XP Scale: " + XP_MODIFIER, 0, 0)

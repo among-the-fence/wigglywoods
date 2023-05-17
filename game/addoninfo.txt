@@ -22,6 +22,9 @@
 			map = "wigglywoods"
 			MaxPlayers = 6
 		},
+		{	map = "norosh"
+			MaxPlayers = 6
+		},
 	]
 	PenaltiesEnabled = false
 	TeamCount = -1
