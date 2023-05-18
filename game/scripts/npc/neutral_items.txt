@@ -97,7 +97,6 @@
 			"item_enchanted_quiver"		"1"
 			"item_greater_faerie_fire"		"1"
 			"item_helm_of_the_undying"		"1"
-			"item_icarus_wings"		"1"
 			"item_ogre_seal_totem"		"1"
 			"item_paladin_sword"		"1"
 			"item_psychic_headband"		"1"
